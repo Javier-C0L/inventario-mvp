@@ -5,7 +5,7 @@ import ProductFormPage from './pages/ProductFormPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import CategoriesPage from './pages/CategoriesPage'
 import SuppliersPage from './pages/SuppliersPage'
-import PlaceholderPage from './pages/PlaceholderPage'
+import DashboardPage from './pages/DashboardPage'
 import MovementsPage from './pages/MovementsPage'
 import SettingsPage from './pages/SettingsPage'
 
@@ -16,7 +16,7 @@ function App() {
         <Sidebar />
         <main className="flex-1 p-6">
           <Routes>
-            <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
+            <Route path="/" element={<DashboardPage />} />
             <Route path="/productos" element={<ProductsPage />} />
             <Route path="/productos/nuevo" element={<ProductFormPage />} />
             <Route path="/productos/:id" element={<ProductDetailPage />} />
