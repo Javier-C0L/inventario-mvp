@@ -1,8 +1,32 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Sidebar from './components/layout/Sidebar'
+import ProductsPage from './pages/ProductsPage'
+import ProductFormPage from './pages/ProductFormPage'
+import ProductDetailPage from './pages/ProductDetailPage'
+import CategoriesPage from './pages/CategoriesPage'
+import SuppliersPage from './pages/SuppliersPage'
+import PlaceholderPage from './pages/PlaceholderPage'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <h1 className="text-2xl font-semibold text-gray-800">Inventario — Fase 0 OK</h1>
-    </div>
+    <BrowserRouter>
+      <div className="flex min-h-screen bg-gray-50">
+        <Sidebar />
+        <main className="flex-1 p-6">
+          <Routes>
+            <Route path="/" element={<PlaceholderPage title="Dashboard" />} />
+            <Route path="/productos" element={<ProductsPage />} />
+            <Route path="/productos/nuevo" element={<ProductFormPage />} />
+            <Route path="/productos/:id" element={<ProductDetailPage />} />
+            <Route path="/productos/:id/editar" element={<ProductFormPage />} />
+            <Route path="/movimientos" element={<PlaceholderPage title="Movimientos" />} />
+            <Route path="/categorias" element={<CategoriesPage />} />
+            <Route path="/proveedores" element={<SuppliersPage />} />
+            <Route path="/configuracion" element={<PlaceholderPage title="Configuración" />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   )
 }
 
