@@ -6,6 +6,7 @@ export async function getProducts(query: ProductQuery): Promise<Paginated<Produc
   if (query.search) params.search = query.search
   if (query.category_id) params.category_id = query.category_id
   if (query.status) params.status = query.status
+  if (query.expiration) params.expiration = query.expiration
   const { data } = await api.get<Paginated<Product>>('/products/', { params })
   return data
 }

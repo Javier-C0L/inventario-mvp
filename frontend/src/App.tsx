@@ -7,6 +7,7 @@ import CategoriesPage from './pages/CategoriesPage'
 import SuppliersPage from './pages/SuppliersPage'
 import PlaceholderPage from './pages/PlaceholderPage'
 import MovementsPage from './pages/MovementsPage'
+import SettingsPage from './pages/SettingsPage'
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Route path="/movimientos" element={<MovementsPage />} />
             <Route path="/categorias" element={<CategoriesPage />} />
             <Route path="/proveedores" element={<SuppliersPage />} />
-            <Route path="/configuracion" element={<PlaceholderPage title="Configuración" />} />
+            <Route path="/configuracion" element={<SettingsPage />} />
           </Routes>
         </main>
       </div>

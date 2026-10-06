@@ -58,6 +58,7 @@ class ProductRead(SQLModel):
     status: ProductStatus
     created_at: datetime
     updated_at: datetime
+    expiration_status: str = "sin_fecha"
 
 
 class ProductList(SQLModel):

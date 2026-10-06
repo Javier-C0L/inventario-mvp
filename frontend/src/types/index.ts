@@ -35,6 +35,7 @@ export interface Product {
   expiration_date: string | null
   location: string | null
   status: ProductStatus
+  expiration_status: 'vigente' | 'proximo_a_vencer' | 'vencido' | 'sin_fecha'
   created_at: string
   updated_at: string
 }
@@ -50,6 +51,7 @@ export interface ProductQuery {
   search?: string
   category_id?: number
   status?: ProductStatus
+  expiration?: string
   limit: number
   offset: number
 }

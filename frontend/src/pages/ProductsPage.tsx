@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { deleteProduct, getProducts } from '../api/products'
 import { getCategories } from '../api/categories'
 import Badge from '../components/ui/Badge'
+import ExpirationBadge from '../components/ui/ExpirationBadge'
 import Modal from '../components/ui/Modal'
 import Pagination from '../components/ui/Pagination'
 import type { Category, Paginated, Product, ProductStatus } from '../types'
@@ -15,6 +16,7 @@ export default function ProductsPage() {
   const [search, setSearch] = useState('')
   const [categoryId, setCategoryId] = useState<number | undefined>()
   const [status, setStatus] = useState<ProductStatus | undefined>()
+  const [expiration, setExpiration] = useState<string | undefined>()
   const [offset, setOffset] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -26,7 +28,7 @@ export default function ProductsPage() {
     setError(null)
     try {
       const [products, cats] = await Promise.all([
-        getProducts({ search: search || undefined, category_id: categoryId, status, limit: LIMIT, offset }),
+        getProducts({ search: search || undefined, category_id: categoryId, status, expiration, limit: LIMIT, offset }),
         getCategories(),
       ])
       setData(products)
@@ -41,7 +43,7 @@ export default function ProductsPage() {
   useEffect(() => {
     load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset, categoryId, status])
+  }, [offset, categoryId, status, expiration])
 
   const confirmDelete = async () => {
     if (!toDelete) return
@@ -75,6 +77,13 @@ export default function ProductsPage() {
           <option value="vencido">Vencido</option>
           <option value="agotado">Agotado</option>
         </select>
+        <select className="border rounded px-3 py-2" value={expiration ?? ''} onChange={(e) => { setOffset(0); setExpiration(e.target.value || undefined) }}>
+          <option value="">Cualquier vencimiento</option>
+          <option value="vigente">Vigente</option>
+          <option value="proximo_a_vencer">Próximo a vencer</option>
+          <option value="vencido">Vencido</option>
+          <option value="sin_fecha">Sin fecha</option>
+        </select>
         <button className="border rounded px-4 py-2" onClick={() => { setOffset(0); load() }}>Buscar</button>
       </div>
 
@@ -102,7 +111,7 @@ export default function ProductsPage() {
                     {p.quantity <= p.min_stock && <span className="ml-2 px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">Stock bajo</span>}
                   </td>
                   <td className="p-3"><Badge status={p.status} /></td>
-                  <td className="p-3">{p.expiration_date ?? '—'}</td>
+                  <td className="p-3"><ExpirationBadge status={p.expiration_status} /> {p.expiration_date ?? ''}</td>
                   <td className="p-3 flex gap-3">
                     <Link className="text-blue-600" to={`/productos/${p.id}`}>Ver</Link>
                     <Link className="text-gray-600" to={`/productos/${p.id}/editar`}>Editar</Link>
