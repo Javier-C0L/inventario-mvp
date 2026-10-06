@@ -53,3 +53,24 @@ export interface ProductQuery {
   limit: number
   offset: number
 }
+
+export type MovementType = 'IN' | 'OUT'
+
+export interface Movement {
+  id: number
+  product_id: number
+  product_name: string | null
+  movement_type: MovementType
+  quantity: number
+  previous_quantity: number
+  new_quantity: number
+  note: string | null
+  created_at: string
+}
+
+export interface MovementList {
+  items: Movement[]
+  total: number
+  limit: number
+  offset: number
+}

@@ -31,6 +31,7 @@ export default function ProductDetailPage() {
         <h2 className="text-xl font-semibold">{product.name}</h2>
         <Link to={`/productos/${product.id}/editar`} className="text-blue-600">Editar</Link>
       </div>
+      <img src={`https://picsum.photos/seed/${product.id}/800/500`} alt={product.name} className="w-full max-w-2xl rounded-lg mb-4 object-cover" />
       <dl className="bg-white rounded-lg shadow divide-y">
         {rows.map(([k, v]) => (
           <div key={k} className="grid grid-cols-3 p-3">

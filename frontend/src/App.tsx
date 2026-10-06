@@ -6,6 +6,7 @@ import ProductDetailPage from './pages/ProductDetailPage'
 import CategoriesPage from './pages/CategoriesPage'
 import SuppliersPage from './pages/SuppliersPage'
 import PlaceholderPage from './pages/PlaceholderPage'
+import MovementsPage from './pages/MovementsPage'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/productos/nuevo" element={<ProductFormPage />} />
             <Route path="/productos/:id" element={<ProductDetailPage />} />
             <Route path="/productos/:id/editar" element={<ProductFormPage />} />
-            <Route path="/movimientos" element={<PlaceholderPage title="Movimientos" />} />
+            <Route path="/movimientos" element={<MovementsPage />} />
             <Route path="/categorias" element={<CategoriesPage />} />
             <Route path="/proveedores" element={<SuppliersPage />} />
             <Route path="/configuracion" element={<PlaceholderPage title="Configuración" />} />

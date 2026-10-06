@@ -88,15 +88,19 @@ export default function ProductsPage() {
           <table className="w-full text-sm">
             <thead className="bg-gray-100 text-left">
               <tr>
-                <th className="p-3">SKU</th><th className="p-3">Nombre</th><th className="p-3">Cantidad</th><th className="p-3">Estado</th><th className="p-3">Vencimiento</th><th className="p-3"></th>
+                <th className="p-3">Imagen</th><th className="p-3">SKU</th><th className="p-3">Nombre</th><th className="p-3">Cantidad</th><th className="p-3">Estado</th><th className="p-3">Vencimiento</th><th className="p-3"></th>
               </tr>
             </thead>
             <tbody>
               {data.items.map((p) => (
                 <tr key={p.id} className="border-t">
+                  <td className="p-3"><img src={`https://picsum.photos/seed/${p.id}/160/160`} alt={p.name} className="w-16 h-16 object-cover rounded" /></td>
                   <td className="p-3">{p.sku}</td>
                   <td className="p-3">{p.name}</td>
-                  <td className="p-3">{p.quantity} {p.unit}</td>
+                  <td className="p-3">
+                    {p.quantity} {p.unit}
+                    {p.quantity <= p.min_stock && <span className="ml-2 px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">Stock bajo</span>}
+                  </td>
                   <td className="p-3"><Badge status={p.status} /></td>
                   <td className="p-3">{p.expiration_date ?? '—'}</td>
                   <td className="p-3 flex gap-3">
