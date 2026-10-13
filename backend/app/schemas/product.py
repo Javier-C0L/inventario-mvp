@@ -12,11 +12,11 @@ class ProductCreate(SQLModel):
     description: str | None = None
     category_id: int | None = None
     supplier_id: int | None = None
-    quantity: int = 0
+    quantity: int = Field(0, ge=0)
     unit: str = "unidad"
-    min_stock: int = 0
-    purchase_price: float = 0
-    sale_price: float = 0
+    min_stock: int = Field(0, ge=0)
+    purchase_price: float = Field(0, ge=0)
+    sale_price: float = Field(0, ge=0)
     entry_date: date = Field(default_factory=date.today)
     expiration_date: date | None = None
     location: str | None = None

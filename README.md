@@ -23,7 +23,7 @@ docker compose up --build
 Backend:
 ```bash
 cd backend
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 alembic upgrade head
 uvicorn app.main:app --reload
 ```
@@ -34,3 +34,20 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## Tests
+
+```bash
+docker compose exec backend pytest
+```
+
+Cubren reglas de negocio: stock (nunca negativo, agotado/reactivación), cálculo de vencimientos, configuración, CRUD de productos y filtros. Usan SQLite en memoria, sin tocar la base de datos real.
+
+## Datos de demostración (seed)
+
+```bash
+docker compose exec backend python -m scripts.seed 1000   # 1000 productos
+docker compose exec backend python -m scripts.seed 25     # solo 25
+```
+
+El seed es idempotente: reutiliza categorías/proveedores existentes y no genera SKUs duplicados. Compatible con `docker compose down -v` (limpiar y volver a poblar).
